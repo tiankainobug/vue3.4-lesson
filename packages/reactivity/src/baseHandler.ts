@@ -8,9 +8,14 @@ export const mutableHandlers:  ProxyHandler<any> = {
         if (key === ReactiveFlags.IS_REACTIVE) {
             return true
         }
+        // 取值的时候 让响应式属性和 effect 映射起来
+
+        // 依赖收集 todo
         return Reflect.get(target, key, receiver)
     },
     set(target, key, value, receiver) {
+        // 找到属性 让对应的effect重新执行
+        // 触发更新 todo
         return Reflect.set(target, key, value, receiver)
     }
 }
