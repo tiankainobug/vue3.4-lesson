@@ -1,4 +1,5 @@
 import {activeEffect} from "./effect";
+import {track} from "./effectAcive";
 
 export enum ReactiveFlags {
     IS_REACTIVE = '__v_isReactive'
@@ -13,7 +14,8 @@ export const mutableHandlers:  ProxyHandler<any> = {
         // 取值的时候 让响应式属性和 effect 映射起来
 
         // 依赖收集
-        console.log(activeEffect, key )
+        console.log(activeEffect, target, key)
+        track(target, key)
 
 
         return Reflect.get(target, key, receiver)
