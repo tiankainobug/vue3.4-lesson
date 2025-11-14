@@ -18,6 +18,9 @@ importers:
       minimist:
         specifier: ^1.2.8
         version: 1.2.8
+      prettier:
+        specifier: 3.6.2
+        version: 3.6.2
       typescript:
         specifier: ^5.9.3
         version: 5.9.3
@@ -445,6 +448,12 @@ packages:
       picocolors: 1.1.1
       source-map-js: 1.2.1
     dev: false
+
+  /prettier@3.6.2:
+    resolution: {integrity: sha512-I7AIg5boAr5R0FFtJ6rCfD+LFsWHp81dolrFD8S79U9tb8Az2nGrJncnMSnys+bpQJfRUzqs9hnA81OAA3hCuQ==}
+    engines: {node: '>=14'}
+    hasBin: true
+    dev: true
 
   /source-map-js@1.2.1:
     resolution: {integrity: sha512-UXWMKhLOwVKb728IUtQPXxfYU+usdybtUrK/8uGE8CQMvrhOpwvzDBwj0QhSL7MQc7vIsISBG8VQ8+IDQxpfQA==}
