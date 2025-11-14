@@ -1,11 +1,39 @@
-module.exports = {
-  printWidth: 150, // 一行最多 120 字符
-  tabWidth: 4, // 4 个空格缩进
-  semi: false, // 语句末尾加分号
-  singleQuote: true, // 使用单引号
-  trailingComma: "es5", // 数组/对象末尾加逗号（兼容 ES5）
-  bracketSpacing: true, // 对象大括号间加空格（{ a: 1 }）
-  arrowParens: "always", // 箭头函数单参数省略括号（x => x）
-  endOfLine: "auto", // 自动适配系统换行符
-  singleAttributePerLine: false
-};
+const config = {
+    // 每行最大长度
+    printWidth: 100,
+
+    // 缩进空格数
+    tabWidth: 4,
+
+    // 使用空格而不是制表符
+    useTabs: false,
+
+    // 语句末尾是否加分号
+    semi: false,
+
+    // 是否使用单引号
+    singleQuote: true,
+
+    // 对象属性是否加引号: “as-needed” 仅在必须时添加
+    quoteProps: 'as-needed',
+
+    // 多行尾部是否加逗号：ES5
+    trailingComma: 'es5',
+
+    // 对象左右空格 { foo: bar }
+    bracketSpacing: true,
+
+    // 箭头函数参数是否总是加括号
+    arrowParens: 'always',
+
+    // 换行风格（auto、lf、crlf）
+    endOfLine: 'lf',
+
+    // Vue 文件中 <script> 和 <style> 的缩进
+    vueIndentScriptAndStyle: false,
+
+    // 是否格式化嵌入的代码，比如 markdown 中的代码块
+    embeddedLanguageFormatting: 'auto',
+}
+
+export default config

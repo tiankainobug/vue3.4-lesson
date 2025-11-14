@@ -14,9 +14,10 @@ class ReactiveEffect {
     public active = true
     // fn: 用户传入的函数
     // scheduler: 响应式数据变化时，需要执行的函数
-    constructor(public fn: Function, public scheduler: Function) {
-
-    }
+    constructor(
+        public fn: Function,
+        public scheduler: Function
+    ) {}
 
     run() {
         if (!this.active) {
