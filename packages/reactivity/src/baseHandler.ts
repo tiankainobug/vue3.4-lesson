@@ -21,7 +21,16 @@ export const mutableHandlers: ProxyHandler<any> = {
     },
     set(target, key, value, receiver) {
         // 找到属性 让对应的effect重新执行
-        // 触发更新 todo
-        return Reflect.set(target, key, value, receiver)
+        let oldValue = target[key]
+
+        let result = Reflect.set(target, key, value, receiver)
+
+        if (oldValue !== value) {
+            // 需要触发更新
+            console.log('触发更新')
+
+            return result
+        }
+        return result
     },
 }

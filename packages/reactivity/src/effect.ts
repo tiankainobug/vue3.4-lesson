@@ -42,6 +42,4 @@ export const trackEffect = (effect, dep) => {
 
     // 让effect 和 dep 关联起来
     effect.deps[effect._depsLength++] = dep
-
-    console.log(effect)
 }
