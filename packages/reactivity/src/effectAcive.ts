@@ -1,4 +1,4 @@
-import { activeEffect, trackEffect } from './effect'
+import { activeEffect, trackEffect, triggerEffect } from './effect'
 
 const targetMap = new WeakMap()
 
@@ -27,5 +27,17 @@ export function track(target, key) {
 
         // 将当前 effect 放入dep 中，后续可以根据值的变化触发此 dep中存放的 effect
         trackEffect(activeEffect, dep)
+    }
+}
+
+export function trigger(target, key, value, oldValue) {
+    const depsMap = targetMap.get(target)
+    if (!depsMap) {
+        return
+    }
+
+    const dep: Map<any, any> = depsMap.get(key)
+    if (dep) {
+        triggerEffect(dep)
     }
 }
