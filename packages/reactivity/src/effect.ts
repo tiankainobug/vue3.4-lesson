@@ -11,7 +11,11 @@ export function effect(fn, options = {}) {
 export let activeEffect: ReactiveEffect
 
 class ReactiveEffect {
+    _trackId = 0
+    deps = []
+    _depsLength = 0
     public active = true
+
     // fn: 用户传入的函数
     // scheduler: 响应式数据变化时，需要执行的函数
     constructor(
@@ -31,4 +35,13 @@ class ReactiveEffect {
             activeEffect = lastEffect
         }
     }
+}
+
+export const trackEffect = (effect, dep) => {
+    dep.set(effect, effect._trackId)
+
+    // 让effect 和 dep 关联起来
+    effect.deps[effect._depsLength++] = dep
+
+    console.log(effect)
 }

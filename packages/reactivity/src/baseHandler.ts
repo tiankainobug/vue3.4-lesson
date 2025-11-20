@@ -15,7 +15,6 @@ export const mutableHandlers: ProxyHandler<any> = {
         // 取值的时候 让响应式属性和 effect 映射起来
 
         // 依赖收集
-        console.log(activeEffect, target, key)
         track(target, key)
 
         return Reflect.get(target, key, receiver)
