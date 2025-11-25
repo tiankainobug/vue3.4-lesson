@@ -6,7 +6,7 @@ export const createDep = (cleanup, key) => {
     const dep = new Map() as any
     dep.cleanup = cleanup
     dep.name = key
-    return new Map()
+    return dep
 }
 
 export function track(target, key) {

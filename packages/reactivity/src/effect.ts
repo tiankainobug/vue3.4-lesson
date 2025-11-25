@@ -8,6 +8,19 @@ export function effect(fn, options = {}) {
     _effect.run()
 }
 
+function preCleanEffect(effect) {
+    effect._depsLength = 0
+    // 每次执行id +1，如果当前同一个 effect 执行，id 就是相同的
+    effect._trackId++
+}
+
+function cleanDepEffect(dep, effect) {
+    dep.delete(effect)
+    if (dep.size === 0) {
+        dep.cleanup()
+    }
+}
+
 export let activeEffect: ReactiveEffect
 
 class ReactiveEffect {
@@ -30,6 +43,9 @@ class ReactiveEffect {
         let lastEffect = activeEffect
         try {
             activeEffect = this
+
+            preCleanEffect(this)
+
             return this.fn()
         } finally {
             activeEffect = lastEffect
@@ -38,10 +54,22 @@ class ReactiveEffect {
 }
 
 export const trackEffect = (effect, dep) => {
-    dep.set(effect, effect._trackId)
+    debugger
+    if (dep.get(effect) !== effect._trackId) {
+        dep.set(effect, effect._trackId)
 
-    // 让effect 和 dep 关联起来
-    effect.deps[effect._depsLength++] = dep
+        let oldDep = effect.deps[effect._depsLength]
+        if (oldDep !== dep) {
+            if (oldDep) {
+                // 删除掉老的
+                cleanDepEffect(oldDep, effect)
+            }
+            // 换成新的
+            effect.deps[effect._depsLength++] = dep
+        } else {
+            effect._depsLength++
+        }
+    }
 }
 
 export const triggerEffect = (dep) => {
